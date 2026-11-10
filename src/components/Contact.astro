@@ -1,0 +1,64 @@
+---
+import type { SiteContent } from '../content/types';
+import { profile } from '../content/profile';
+import { withBase } from '../lib/site';
+
+interface Props {
+  content: SiteContent;
+}
+const { contact, hero, lang } = Astro.props.content;
+---
+
+<section id="contact" class="contact" aria-labelledby="contact-title">
+  <div class="container inner">
+    <h2 id="contact-title" class="section-title">{contact.heading}</h2>
+    <p class="text">{contact.text}</p>
+    <a class="email" href={`mailto:${profile.email}`}>{profile.email}</a>
+    <div class="ctas">
+      <a class="btn" href={profile.linkedin} rel="me noopener" target="_blank">
+        {contact.linkedinLabel}<span class="visually-hidden"> ({lang === 'en' ? 'opens in a new tab' : 'abre em nova aba'})</span>
+      </a>
+      <a class="btn" href={withBase(profile.cvPath)} download="Italo-Carvalho-CV.pdf">{hero.ctaDownloadCv}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background: radial-gradient(55% 90% at 90% 100%, var(--glow), transparent 72%), var(--bg);
+    border-top: 1px solid var(--line);
+  }
+  .inner {
+    display: grid;
+    gap: 16px;
+    padding-block: 96px;
+  }
+  .inner .section-title {
+    margin: 0;
+  }
+  .text {
+    max-width: 52ch;
+    color: var(--muted);
+    font-size: 1.08rem;
+  }
+  .email {
+    justify-self: start;
+    font-size: clamp(1.25rem, 4vw, 1.9rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+    overflow-wrap: anywhere;
+  }
+  .email:hover {
+    text-decoration-color: var(--accent);
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+  }
+</style>

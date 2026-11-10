@@ -1,0 +1,84 @@
+---
+import '@fontsource-variable/plus-jakarta-sans';
+import '../styles/global.css';
+import type { SiteContent } from '../content/types';
+import { profile } from '../content/profile';
+import { localeHome, withBase } from '../lib/site';
+
+interface Props {
+  content: SiteContent;
+}
+
+const { content } = Astro.props;
+const { lang, meta } = content;
+
+const site = Astro.site ?? new URL('http://localhost:4321');
+const absolute = (path: string) => new URL(path, site).href;
+const canonical = absolute(localeHome(lang));
+const ogImage = absolute(withBase('og-image.png'));
+const ogLocale = lang === 'en' ? 'en_US' : 'pt_BR';
+const ogLocaleAlt = lang === 'en' ? 'pt_BR' : 'en_US';
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.fullName,
+  jobTitle: 'Senior Software Engineer',
+  url: absolute(localeHome('en')),
+  image: absolute(withBase('og-image.png')),
+  sameAs: [profile.linkedin],
+  address: { '@type': 'PostalAddress', addressLocality: 'Brasília', addressCountry: 'BR' },
+};
+---
+
+<!doctype html>
+<html lang={lang === 'en' ? 'en' : 'pt-BR'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={absolute(localeHome('en'))} />
+    <link rel="alternate" hreflang="pt-BR" href={absolute(localeHome('pt'))} />
+    <link rel="alternate" hreflang="x-default" href={absolute(localeHome('en'))} />
+
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101319" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href={withBase('favicon.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={withBase('apple-touch-icon.png')} />
+
+    <!-- Open Graph / social previews (LinkedIn, WhatsApp, X) -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={meta.ogImageAlt} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlt} />
+    <meta property="profile:first_name" content="Ítalo" />
+    <meta property="profile:last_name" content="Carvalho" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={meta.title} />
+    <meta name="twitter:description" content={meta.description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+
+    <!-- Apply the saved theme before first paint to avoid a flash. -->
+    <script is:inline>
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{content.nav.skipToContent}</a>
+    <slot />
+  </body>
+</html>

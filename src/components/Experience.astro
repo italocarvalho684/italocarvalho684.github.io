@@ -1,0 +1,177 @@
+---
+import type { SiteContent } from '../content/types';
+import { formatPeriod } from '../lib/site';
+
+interface Props {
+  content: SiteContent;
+}
+const { experience, projects, lang } = Astro.props.content;
+const projectTitle = (id: string) => projects.items.find((p) => p.id === id)?.title ?? id;
+---
+
+<section id="experience" aria-labelledby="experience-title">
+  <h2 id="experience-title" class="section-title">{experience.heading}</h2>
+  <ol class="timeline">
+    {
+      experience.items.map((job, i) => (
+        <li class:list={['job', { current: i === 0 && job.end === null }]}>
+          <p class="when">
+            <time datetime={job.start}>{formatPeriod(job.start, job.end, lang, experience.present)}</time>
+          </p>
+          <span class="node" aria-hidden="true" />
+          <div class="content">
+            <h3>
+              {job.role}, <span class="at">{job.company}</span>
+            </h3>
+            <ul class="meta-list">
+              {job.client && (
+                <li>
+                  {experience.clientLabel}: {job.client}
+                </li>
+              )}
+              <li>{job.location}</li>
+            </ul>
+            <p class="summary">{job.summary}</p>
+            {job.bullets.length > 0 && (
+              <ul class="bullets">
+                {job.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            )}
+            {job.cases.length > 0 && (
+              <p class="cases">
+                <span class="label">{experience.casesLabel}:</span>{' '}
+                {job.cases.map((id, k) => (
+                  <Fragment>
+                    <a class="text-link" href={`#case-${id}`}>{projectTitle(id)}</a>{k < job.cases.length - 1 ? ', ' : ''}
+                  </Fragment>
+                ))}
+              </p>
+            )}
+            <p class="stack">
+              <span>{experience.stackLabel}:</span> {job.stack.join(', ')}
+            </p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .job {
+    display: grid;
+    grid-template-columns: 9.5rem 15px minmax(0, 1fr);
+    gap: 20px;
+  }
+  .when {
+    padding-top: 3px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .node {
+    position: relative;
+  }
+  .node::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--line);
+  }
+  .job:last-child .node::before {
+    bottom: auto;
+    height: 14px;
+  }
+  .node::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 9px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--muted);
+  }
+  .current .node::after {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--soft);
+  }
+  .content {
+    display: grid;
+    gap: 12px;
+    padding-bottom: 48px;
+    min-width: 0;
+  }
+  .job:last-child .content {
+    padding-bottom: 0;
+  }
+  h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .at {
+    font-weight: 500;
+  }
+  .meta-list {
+    margin-top: -6px;
+  }
+  .summary {
+    max-width: 66ch;
+  }
+  .bullets {
+    display: grid;
+    gap: 8px;
+    max-width: 66ch;
+    padding-left: 1.1em;
+  }
+  .bullets li::marker {
+    color: var(--muted);
+  }
+  .cases .label,
+  .stack > span {
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .stack {
+    color: var(--muted);
+    font-size: 0.9rem;
+    max-width: 66ch;
+  }
+
+  @media (max-width: 640px) {
+    .job {
+      grid-template-columns: 15px minmax(0, 1fr);
+      column-gap: 16px;
+      row-gap: 4px;
+    }
+    .when {
+      grid-column: 2;
+      grid-row: 1;
+      padding: 0;
+    }
+    .node {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+    }
+    .node::after {
+      top: 7px;
+    }
+    .content {
+      grid-column: 2;
+    }
+  }
+</style>

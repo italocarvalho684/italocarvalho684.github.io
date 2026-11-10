@@ -1,0 +1,154 @@
+---
+import type { SiteContent } from '../content/types';
+import { profile } from '../content/profile';
+import { localeHome } from '../lib/site';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  content: SiteContent;
+}
+const { nav, lang } = Astro.props.content;
+const otherLang = lang === 'en' ? 'pt' : 'en';
+const links = [
+  { id: 'about', label: nav.about },
+  { id: 'experience', label: nav.experience },
+  { id: 'work', label: nav.projects },
+  { id: 'skills', label: nav.skills },
+  { id: 'contact', label: nav.contact },
+];
+---
+
+<header class="site-header" data-header>
+  <div class="container bar">
+    <a class="brand" href={localeHome(lang)}>{profile.name}</a>
+    <nav aria-label={lang === 'en' ? 'Sections' : 'Seções'}>
+      <ul>
+        {
+          links.map((l) => (
+            <li>
+              <a href={`#${l.id}`} data-nav={l.id}>
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="tools">
+      <a class="lang" href={localeHome(otherLang)} hreflang={otherLang === 'en' ? 'en' : 'pt-BR'} lang={otherLang === 'en' ? 'en' : 'pt-BR'}>
+        <span aria-hidden="true">{nav.switchLanguageShort}</span>
+        <span class="visually-hidden">{nav.switchLanguage}</span>
+      </a>
+      <ThemeToggle label={nav.toggleTheme} />
+    </div>
+  </div>
+</header>
+
+<script>
+  // Hairline once the page scrolls; mark the section in view in the nav.
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const onScroll = () => header?.toggleAttribute('data-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const links = new Map<string, HTMLAnchorElement>();
+  document.querySelectorAll<HTMLAnchorElement>('[data-nav]').forEach((a) => links.set(a.dataset.nav!, a));
+  const sections = [...links.keys()].map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        links.forEach((a) => a.removeAttribute('aria-current'));
+        links.get(entry.target.id)?.setAttribute('aria-current', 'true');
+      });
+    },
+    { rootMargin: '-35% 0px -60% 0px' },
+  );
+  sections.forEach((s) => observer.observe(s));
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding-top: env(safe-area-inset-top, 0px);
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+  .site-header[data-scrolled] {
+    background: var(--bg);
+    border-bottom-color: var(--line);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: var(--header-h);
+    font-size: 0.95rem;
+  }
+  .brand {
+    font-weight: 700;
+    text-decoration: none;
+  }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 24px;
+  }
+  nav a {
+    display: inline-block;
+    padding-block: 8px;
+    color: var(--muted);
+    text-decoration: none;
+    background: linear-gradient(currentColor, currentColor) no-repeat left bottom / 0 2px;
+    transition:
+      color 0.15s ease,
+      background-size 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  nav a:hover {
+    color: var(--fg);
+  }
+  nav a[aria-current] {
+    color: var(--fg);
+    background-size: 100% 2px;
+  }
+  .tools {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lang {
+    display: inline-grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .lang:hover {
+    border-color: var(--muted);
+  }
+  @media (max-width: 760px) {
+    nav {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    nav a,
+    .site-header {
+      transition: none;
+    }
+  }
+</style>

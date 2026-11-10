@@ -1,0 +1,59 @@
+---
+import type { SiteContent } from '../content/types';
+
+interface Props {
+  content: SiteContent;
+}
+const { skills } = Astro.props.content;
+---
+
+<section id="skills" aria-labelledby="skills-title">
+  <h2 id="skills-title" class="section-title">{skills.heading}</h2>
+  <dl class="capabilities">
+    {
+      skills.capabilities.map((c) => (
+        <div class="row">
+          <dt>{c.title}</dt>
+          <dd>
+            <p class="proof">{c.proof}</p>
+            <p class="tech">{c.tech.join(', ')}</p>
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>
+
+<style>
+  .capabilities {
+    border-top: 1px solid var(--line);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+    gap: 6px 32px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  dt {
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  dd {
+    margin: 0;
+    display: grid;
+    gap: 4px;
+    max-width: 60ch;
+  }
+  .proof {
+    color: var(--muted);
+  }
+  .tech {
+    font-weight: 500;
+  }
+  @media (max-width: 640px) {
+    .row {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

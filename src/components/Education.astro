@@ -1,0 +1,82 @@
+---
+import type { SiteContent } from '../content/types';
+
+interface Props {
+  content: SiteContent;
+}
+const { education } = Astro.props.content;
+---
+
+<section id="education" aria-labelledby="education-title">
+  <h2 id="education-title" class="section-title">{education.heading}</h2>
+  <div class="cols">
+    <ul class="list">
+      {
+        education.items.map((e) => (
+          <li>
+            <p class="period">{e.period}</p>
+            <h3>{e.degree}</h3>
+            <p class="where">{e.institution}</p>
+            {e.note && <p class="note">{e.note}</p>}
+          </li>
+        ))
+      }
+    </ul>
+    <div>
+      <h3 class="sub">{education.certificationsHeading}</h3>
+      <ul class="list">
+        {
+          education.certifications.map((c) => (
+            <li>
+              <p class="period">{c.year}</p>
+              <h4>{c.name}</h4>
+              <p class="where">{c.issuer}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 32px 48px;
+  }
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 20px;
+  }
+  .period {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+  }
+  h3,
+  h4 {
+    margin: 2px 0 0;
+    font-size: 1.02rem;
+    font-weight: 700;
+  }
+  .sub {
+    margin: 0 0 16px;
+    font-size: 1.1rem;
+  }
+  .where {
+    color: var(--muted);
+  }
+  .note {
+    margin-top: 4px;
+    font-size: 0.92rem;
+  }
+  @media (max-width: 640px) {
+    .cols {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

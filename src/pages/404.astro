@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import { content } from '../content';
+import { localeHome } from '../lib/site';
+const c = content.en;
+---
+
+<Base content={c}>
+  <main id="main" class="container nf">
+    <p class="code">404</p>
+    <h1>This page doesn't exist.</h1>
+    <p>Esta página não existe.</p>
+    <p class="links">
+      <a class="btn btn-primary" href={localeHome('en')}>Go to the home page</a>
+      <a class="btn" href={localeHome('pt')} lang="pt-BR">Ir para a página inicial</a>
+    </p>
+  </main>
+</Base>
+
+<style>
+  .nf {
+    min-height: 80vh;
+    display: grid;
+    align-content: center;
+    gap: 12px;
+  }
+  .code {
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 1.2rem;
+  }
+  h1 {
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 3rem);
+    letter-spacing: -0.03em;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+  }
+</style>

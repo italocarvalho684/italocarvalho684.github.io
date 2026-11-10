@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import { content } from '../content';
+import type { SiteContent } from '../content/types';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import Intro from './Intro.astro';
+import Experience from './Experience.astro';
+import Projects from './Projects.astro';
+import Skills from './Skills.astro';
+import Education from './Education.astro';
+import Contact from './Contact.astro';
+
+interface Props {
+  lang: SiteContent['lang'];
+}
+const c = content[Astro.props.lang];
+const year = new Date().getFullYear();
+---
+
+<Base content={c}>
+  <Header content={c} />
+  <main id="main" tabindex="-1">
+    <Hero content={c} />
+    <div class="container sections">
+      <Intro content={c} />
+      <Experience content={c} />
+      <Projects content={c} />
+      <Skills content={c} />
+      <Education content={c} />
+    </div>
+    <Contact content={c} />
+  </main>
+  <footer class="container foot">
+    <p>© {year} Ítalo Carvalho</p>
+    <p>{c.footer.builtWith}</p>
+  </footer>
+</Base>
+
+<style>
+  main:focus {
+    outline: none;
+  }
+  .sections {
+    display: grid;
+    gap: 128px;
+    padding-block: 72px 112px;
+  }
+  @media (max-width: 640px) {
+    .sections {
+      gap: 88px;
+      padding-block: 48px 80px;
+    }
+  }
+  .foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding-block: 24px calc(24px + env(safe-area-inset-bottom, 0px));
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+</style>

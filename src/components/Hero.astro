@@ -1,0 +1,132 @@
+---
+import { Image } from 'astro:assets';
+import photo from '../assets/profile.jpg';
+import type { SiteContent } from '../content/types';
+import { profile } from '../content/profile';
+import { withBase } from '../lib/site';
+
+interface Props {
+  content: SiteContent;
+}
+const { hero, lang } = Astro.props.content;
+---
+
+<div class="hero-band">
+  <div class="container hero">
+    <div class="hero-text">
+      <h1><span class="visually-hidden">{profile.name}: </span>{hero.headline}</h1>
+      <p class="role">{hero.title}</p>
+      <p class="lede">{hero.lede}</p>
+      <div class="ctas">
+        <a class="btn btn-primary cv" href={withBase(profile.cvPath)} download="Italo-Carvalho-CV.pdf">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"></path></svg>
+          {hero.ctaDownloadCv}
+        </a>
+        <a class="btn" href={profile.linkedin} rel="me noopener" target="_blank">
+          {hero.ctaLinkedIn}<span class="visually-hidden"> ({lang === 'en' ? 'opens in a new tab' : 'abre em nova aba'})</span>
+        </a>
+        <a class="btn" href="#contact">{hero.ctaContact}</a>
+      </div>
+      <p class="status">{hero.availability}</p>
+    </div>
+    <div class="photo">
+      <Image src={photo} alt={hero.photoAlt} width={440} height={440} widths={[200, 440]} sizes="(max-width: 760px) 96px, 200px" loading="eager" fetchpriority="high" />
+    </div>
+  </div>
+</div>
+
+<style>
+  .hero-band {
+    /* Extends under the transparent sticky header so the glow has no seam. */
+    margin-top: calc(-1 * (var(--header-h) + env(safe-area-inset-top, 0px)));
+    padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+    background: radial-gradient(55% 90% at 90% 0%, var(--glow), transparent 72%), var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 40px;
+    align-items: center;
+    padding-block: 72px 80px;
+  }
+  .hero-text {
+    display: grid;
+    gap: 20px;
+  }
+  h1 {
+    margin: 0;
+    max-width: 14ch;
+    font-size: clamp(2.4rem, 5.6vw, 3.75rem);
+    line-height: 1.03;
+    letter-spacing: -0.035em;
+    font-weight: 800;
+  }
+  .role {
+    margin-top: 4px;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .lede {
+    max-width: 54ch;
+    margin-top: -8px;
+    color: var(--muted);
+    font-size: 1.08rem;
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  .status::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--soft);
+  }
+  .photo {
+    width: 200px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    padding: 5px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .photo :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 760px) {
+    .hero {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+      padding-block: 40px 56px;
+    }
+    .photo {
+      width: 96px;
+      padding: 3px;
+      order: -1;
+    }
+    .ctas {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .ctas .cv {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

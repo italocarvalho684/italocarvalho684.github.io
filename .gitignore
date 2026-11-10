@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+.env
+# Original photo (keep out of the public repo; the cropped copy lives in src/assets)
+C41E2529-*.jpeg
+.impeccable/
+# Source copy of the CV; the published one is public/resume.pdf
+/resume.pdf

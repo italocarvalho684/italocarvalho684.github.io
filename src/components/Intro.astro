@@ -1,0 +1,106 @@
+---
+import type { SiteContent } from '../content/types';
+
+interface Props {
+  content: SiteContent;
+}
+const { highlights, clients, about, lang } = Astro.props.content;
+---
+
+<div class="intro">
+  <dl class="facts" aria-label={lang === 'en' ? 'Highlights' : 'Destaques'}>
+    {
+      highlights.map((h) => (
+        <div class="fact">
+          <dt>{h.value}</dt>
+          <dd>{h.label}</dd>
+        </div>
+      ))
+    }
+  </dl>
+
+  <div class="clients">
+    <p>{clients.label}</p>
+    <ul>
+      {clients.names.map((name) => <li>{name}</li>)}
+    </ul>
+  </div>
+
+  <section id="about" aria-labelledby="about-title">
+    <h2 id="about-title" class="section-title">{about.heading}</h2>
+    <div class="about">
+      {about.paragraphs.map((p) => <p>{p}</p>)}
+    </div>
+  </section>
+</div>
+
+<style>
+  .intro {
+    display: grid;
+    gap: 56px;
+  }
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .fact {
+    display: grid;
+    gap: 4px;
+    align-content: start;
+    padding: 4px 20px;
+    border-left: 1px solid var(--line);
+  }
+  .fact:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+  dt {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  dd {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+  .clients {
+    display: grid;
+    gap: 10px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .clients p {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  .clients ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 28px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .about {
+    display: grid;
+    gap: 18px;
+    max-width: 64ch;
+    font-size: 1.08rem;
+  }
+  @media (max-width: 760px) {
+    .facts {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 24px;
+    }
+    .fact:nth-child(3) {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+</style>
