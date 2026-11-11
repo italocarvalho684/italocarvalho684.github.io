@@ -4,10 +4,10 @@ export const en: SiteContent = {
   lang: 'en',
 
   meta: {
-    title: 'Ítalo Carvalho — Senior Software Engineer · Mobile & Web',
+    title: 'Ítalo Carvalho | Senior Software Engineer · Mobile & Web',
     description:
-      'Senior Software Engineer with 9+ years building mobile apps people can rely on — native iOS depth and React Native speed — proven in banking and regulated healthcare.',
-    ogImageAlt: 'Ítalo Carvalho — Senior Software Engineer · Mobile & Web',
+      'Senior Software Engineer with 9+ years in mobile. I combine native iOS depth with React Native speed and have shipped apps for banking and regulated healthcare.',
+    ogImageAlt: 'Ítalo Carvalho, Senior Software Engineer, Mobile & Web',
   },
 
   nav: {
@@ -50,7 +50,7 @@ export const en: SiteContent = {
     heading: 'About',
     paragraphs: [
       "I'm a senior software engineer with 9+ years building mobile apps where mistakes are expensive: Banco do Brasil's banking app, used by millions of people, and regulated digital health apps for Sanofi, CSL Behring and Roche.",
-      'My edge is working on both sides of the bridge. I go deep into native iOS — and Android when needed — to solve what most React Native developers avoid: brownfield integrations, native modules, security and offline sync, while still delivering at cross-platform speed.',
+      'I work on both sides: native iOS (and Android when needed) and React Native. That covers the work many React Native developers avoid, such as brownfield integrations, native modules, security and offline sync, without losing cross-platform speed.',
       'I enjoy building the foundations other engineers build on: reusable modules, server-driven UI engines and offline layers. I partner with tech leads on architecture, review code, mentor engineers on React Native and TypeScript, and care about the details that make an app trustworthy.',
     ],
   },
@@ -72,7 +72,7 @@ export const en: SiteContent = {
         start: '2022-01',
         end: null,
         summary:
-          'BrightInsight is a VC-backed Silicon Valley platform for regulated digital health. I build patient apps classified as medical devices for Sanofi, Regeneron, CSL Behring and Roche, in a team of 3–4 engineers and a tech lead.',
+          'BrightInsight is a VC-backed Silicon Valley platform for regulated digital health. I build patient apps classified as medical devices for Sanofi, Regeneron, CSL Behring and Roche, in a team of 3 to 4 engineers and a tech lead.',
         bullets: [
           'Built CSL Modules, a library of reusable UI components and shared flows (login, consent, account creation) that became the foundation of the Hizentra App, B SUPPORT and other BrightInsight apps.',
           "Built the Hizentra App's UI foundation and its product QR code scanner.",
@@ -122,7 +122,7 @@ export const en: SiteContent = {
         start: '2017-09',
         end: '2019-08',
         summary:
-          "Helped move Banco do Brasil's large native banking app to React Native without stopping it — one flow at a time.",
+          "Helped move Banco do Brasil's large native banking app to React Native one flow at a time, without stopping it.",
         bullets: [
           'Took part in releases, fixing issues quickly to minimize impact on users.',
         ],
@@ -140,7 +140,7 @@ export const en: SiteContent = {
         end: '2017-09',
         summary: "Built features for the personal finance and budgeting area of Banco do Brasil's native iOS app.",
         bullets: [
-          'Drew custom charts from scratch with Core Graphics, no third-party libraries, including a budget bar that shifts between on-track, warning and over-budget states as spending changes.',
+          'Drew custom charts from scratch with Core Graphics, without third-party libraries, including a budget bar that shifts between on-track, warning and over-budget states as spending changes.',
           'Built reusable, highly customizable UI components with view code and NIBs.',
           'Stored data locally with Core Data so it was fetched once and queried on the device, making navigation fast.',
         ],
@@ -172,7 +172,7 @@ export const en: SiteContent = {
         contributions: [
           'Helped conceive the platform and build its foundation.',
           'Built much of the engine in Node.js and TypeScript: it receives screen instructions (e.g. "list with a button that navigates to another screen") and returns a payload ready for the app to render.',
-          'Built the React Native renderer that turns those payloads into screens — templates, loading states and navigation — inside the banking app.',
+          'Built the React Native renderer that turns those payloads into screens inside the banking app, including templates, loading states and navigation.',
           'Designed screen templates with the UX team and presented the platform to other teams.',
         ],
         outcome: [
@@ -194,7 +194,7 @@ export const en: SiteContent = {
         period: '2023',
         role: 'Senior Mobile Developer (BairesDev)',
         context:
-          'People with hemophilia B considering gene therapy (HEMGENIX) need to track bleeds, factor IX activity and how they feel, and bring that data to their doctor. A regulated app, built from zero on a tight timeline.',
+          'People with hemophilia B considering gene therapy (HEMGENIX) need to track bleeds, factor IX activity and how they feel, and bring that data to their doctor. The app is regulated and was built from zero on a tight timeline.',
         contributions: [
           'Built the consent flow: when a patient withdraws consent, remote data is deleted and kept only on the device; when they consent again, it syncs back.',
           "Built the app's offline layer and data synchronization.",
@@ -232,7 +232,7 @@ export const en: SiteContent = {
           'Added push and local reminders, on-device PDF reports, accessibility improvements and Japanese and Arabic (RTL) support.',
         ],
         outcome: [
-          'The client publishes and updates educational content without an app release — and started publishing more often.',
+          'The client publishes and updates educational content without an app release, and has started publishing more often.',
           'The app is rated 4.7★ from ~1.9K ratings on the App Store.',
         ],
         stack: ['React Native', 'TypeScript', 'Keychain/Keystore', 'Push notifications', 'i18n/RTL', 'PDF generation'],

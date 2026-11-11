@@ -4,10 +4,10 @@ export const pt: SiteContent = {
   lang: 'pt',
 
   meta: {
-    title: 'Ítalo Carvalho — Senior Software Engineer · Mobile & Web',
+    title: 'Ítalo Carvalho | Senior Software Engineer · Mobile & Web',
     description:
-      'Senior Software Engineer com mais de 9 anos construindo apps mobile em que as pessoas podem confiar — profundidade em iOS nativo e velocidade com React Native — com experiência em bancos e saúde regulada.',
-    ogImageAlt: 'Ítalo Carvalho — Senior Software Engineer · Mobile & Web',
+      'Senior Software Engineer com mais de 9 anos em mobile. Uno profundidade em iOS nativo à velocidade do React Native e já entreguei apps para bancos e saúde regulada.',
+    ogImageAlt: 'Ítalo Carvalho, Senior Software Engineer, Mobile & Web',
   },
 
   nav: {
@@ -50,7 +50,7 @@ export const pt: SiteContent = {
     heading: 'Sobre',
     paragraphs: [
       'Sou engenheiro de software sênior, com mais de 9 anos construindo apps mobile em que erro custa caro: o app do Banco do Brasil, usado por milhões de pessoas, e apps de saúde regulados para Sanofi, CSL Behring e Roche.',
-      'Meu diferencial é trabalhar dos dois lados da ponte. Vou fundo no iOS nativo — e no Android quando preciso — para resolver o que a maioria dos devs React Native evita: integrações brownfield, módulos nativos, segurança e sincronização offline, sem perder a velocidade do cross-platform.',
+      'Trabalho dos dois lados: iOS nativo (e Android quando preciso) e React Native. Isso cobre o trabalho que muitos devs React Native evitam, como integrações brownfield, módulos nativos, segurança e sincronização offline, sem perder a velocidade do cross-platform.',
       'Gosto de construir as fundações sobre as quais outros engenheiros constroem: módulos reutilizáveis, motores de UI server-driven e camadas offline. Trabalho junto com tech leads em arquitetura, faço code review, mentoro devs em React Native e TypeScript e cuido dos detalhes que tornam um app confiável.',
     ],
   },
@@ -72,7 +72,7 @@ export const pt: SiteContent = {
         start: '2022-01',
         end: null,
         summary:
-          'A BrightInsight é uma plataforma de saúde digital regulada, do Vale do Silício e apoiada por venture capital. Construo apps para pacientes, classificados como dispositivos médicos, para Sanofi, Regeneron, CSL Behring e Roche, em um time de 3–4 devs e um tech lead.',
+          'A BrightInsight é uma plataforma de saúde digital regulada, do Vale do Silício e apoiada por venture capital. Construo apps para pacientes, classificados como dispositivos médicos, para Sanofi, Regeneron, CSL Behring e Roche, em um time de 3 a 4 devs e um tech lead.',
         bullets: [
           'Construí o CSL Modules, biblioteca de componentes de UI e fluxos compartilhados (login, consentimento, criação de conta) que virou a base do Hizentra App, do B SUPPORT e de outros apps da BrightInsight.',
           'Construí a fundação de UI e o leitor de QR code do produto no Hizentra App.',
@@ -122,7 +122,7 @@ export const pt: SiteContent = {
         start: '2017-09',
         end: '2019-08',
         summary:
-          'Ajudei a levar o grande app nativo do Banco do Brasil para React Native sem pará-lo — um fluxo de cada vez.',
+          'Ajudei a levar o grande app nativo do Banco do Brasil para React Native um fluxo de cada vez, sem pará-lo.',
         bullets: [
           'Participei dos releases, resolvendo problemas rapidamente para minimizar o impacto nos usuários.',
         ],
@@ -172,7 +172,7 @@ export const pt: SiteContent = {
         contributions: [
           'Ajudei a idealizar a plataforma e a construir sua fundação.',
           'Construí boa parte do motor em Node.js e TypeScript: ele recebe as instruções de tela (ex.: "lista com botão que navega para outra tela") e devolve um payload pronto para o app renderizar.',
-          'Construí o renderer em React Native que transforma esses payloads em telas — templates, estados de carregamento e navegação — dentro do app do banco.',
+          'Construí o renderer em React Native que transforma esses payloads em telas dentro do app do banco, incluindo templates, estados de carregamento e navegação.',
           'Desenhei templates de tela com o time de UX e apresentei a plataforma para outros times.',
         ],
         outcome: [
@@ -194,7 +194,7 @@ export const pt: SiteContent = {
         period: '2023',
         role: 'Senior Mobile Developer (BairesDev)',
         context:
-          'Pessoas com hemofilia B que consideram a terapia gênica (HEMGENIX) precisam registrar sangramentos, atividade do fator IX e como se sentem, e levar esses dados ao médico. Um app regulado, construído do zero com prazo apertado.',
+          'Pessoas com hemofilia B que consideram a terapia gênica (HEMGENIX) precisam registrar sangramentos, atividade do fator IX e como se sentem, e levar esses dados ao médico. O app é regulado e foi construído do zero com prazo apertado.',
         contributions: [
           'Construí o fluxo de consentimento: quando o paciente retira o consentimento, os dados remotos são apagados e mantidos só no dispositivo; quando consente de novo, voltam a sincronizar.',
           'Construí a camada offline e a sincronização de dados do app.',
@@ -232,7 +232,7 @@ export const pt: SiteContent = {
           'Adicionei lembretes push e locais, relatórios em PDF gerados no dispositivo, melhorias de acessibilidade e suporte a japonês e árabe (RTL).',
         ],
         outcome: [
-          'O cliente publica e atualiza conteúdo educacional sem nova versão do app — e passou a publicar com mais frequência.',
+          'O cliente publica e atualiza conteúdo educacional sem nova versão do app e passou a publicar com mais frequência.',
           'O app tem nota 4,7★ com cerca de 1,9 mil avaliações na App Store.',
         ],
         stack: ['React Native', 'TypeScript', 'Keychain/Keystore', 'Notificações push', 'i18n/RTL', 'Geração de PDF'],
